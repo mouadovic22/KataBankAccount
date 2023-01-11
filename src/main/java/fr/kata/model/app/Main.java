@@ -1,4 +1,4 @@
-package fr.kata.model.main;
+package fr.kata.model.app;
 
 import fr.kata.model.BankAccount;
 
