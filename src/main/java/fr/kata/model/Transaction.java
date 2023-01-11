@@ -4,16 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction {
 
-    private LocalDate date;
-    private double amount;
+    private LocalDateTime date;
+    private BigDecimal amount;
     private TransactionType type;
-    private double newBalance;
+    private BigDecimal newBalance;
 
 }
