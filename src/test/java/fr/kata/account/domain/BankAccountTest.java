@@ -1,6 +1,6 @@
-package fr.kata.model;
+package fr.kata.account.domain;
 
-import fr.kata.model.print.PrintStatement;
+import fr.kata.account.print.PrintStatement;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -22,9 +22,8 @@ public class BankAccountTest {
 
     @Before
     public void setUp() {
-        bankAccount = new BankAccount(BigDecimal.ZERO, "Bart Simpson", 123, new ArrayList<>());
         printStatement = mock(PrintStatement.class);
-        bankAccount.setPrintStatement(printStatement);
+        bankAccount = new BankAccount(printStatement, BigDecimal.ZERO, "Bart Simpson", 123, new ArrayList<>());
     }
 
     @Test
@@ -35,8 +34,10 @@ public class BankAccountTest {
 
     @Test
     public void testDepositAmountNegative() {
+        BigDecimal amount = BigDecimal.valueOf(-50.0);
+        LocalDateTime depositDateTime = LocalDateTime.of(2022, 12, 30, 12, 15);
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class,
-                () -> bankAccount.deposit(BigDecimal.valueOf(-50.0), LocalDateTime.of(2022, 12, 30, 12, 15)));
+                () -> bankAccount.deposit(amount, depositDateTime));
         assertEquals("Amount -50.0 to deposit must be positive", illegalArgumentException.getMessage());
     }
 
@@ -57,8 +58,10 @@ public class BankAccountTest {
     @Test
     public void testWithdrawInsufficientBalance() {
         bankAccount.deposit(BigDecimal.valueOf(200.0), LocalDateTime.of(2023, 1, 10, 14, 0));
+        BigDecimal amount = BigDecimal.valueOf(300.0);
+        LocalDateTime withdrawDateTime = LocalDateTime.of(2023, 1, 11, 14, 0);
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class,
-                () -> bankAccount.withdraw(BigDecimal.valueOf(300.0), LocalDateTime.of(2023, 1, 11, 14, 0)));
+                () -> bankAccount.withdraw(amount, withdrawDateTime));
         assertEquals("Insufficient balance 200.0", illegalArgumentException.getMessage());
     }
 

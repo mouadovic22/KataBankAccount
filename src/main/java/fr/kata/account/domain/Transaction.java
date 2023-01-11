@@ -1,4 +1,4 @@
-package fr.kata.model;
+package fr.kata.account.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,8 @@
-package fr.kata.model.app;
+package fr.kata.account.app;
 
-import fr.kata.model.BankAccount;
+import fr.kata.account.domain.BankAccount;
+import fr.kata.account.print.PrintStatement;
+import fr.kata.account.print.PrintStatementImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,7 +10,8 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        BankAccount bankAccount = new BankAccount(BigDecimal.ZERO, "Bart Simpson", 123, new ArrayList<>());
+        PrintStatement printStatement = new PrintStatementImpl();
+        BankAccount bankAccount = new BankAccount(printStatement, BigDecimal.ZERO, "Bart Simpson", 123, new ArrayList<>());
         bankAccount.deposit(new BigDecimal(10), LocalDateTime.now());
         bankAccount.deposit(new BigDecimal(40), LocalDateTime.now());
         bankAccount.withdraw(new BigDecimal(10), LocalDateTime.now());

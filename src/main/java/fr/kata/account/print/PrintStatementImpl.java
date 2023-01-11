@@ -1,4 +1,4 @@
-package fr.kata.model.print;
+package fr.kata.account.print;
 
 public class PrintStatementImpl implements PrintStatement {
 

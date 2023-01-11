@@ -1,6 +1,7 @@
-package fr.kata.model;
+package fr.kata.account.domain;
 
-import fr.kata.model.print.PrintStatement;
+import fr.kata.account.print.PrintStatement;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -8,23 +9,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class BankAccount {
 
-    private PrintStatement printStatement;
+    private final PrintStatement printStatement;
 
     private BigDecimal balance;
-    private String accountHolder;
-    private int accountNumber;
+    private final String accountHolder;
+    private final int accountNumber;
     private List<Transaction> transactions;
 
-    public BankAccount(BigDecimal balance, String accountHolder, int accountNumber, List<Transaction> transactions) {
-        this.balance = balance;
-        this.accountHolder = accountHolder;
-        this.accountNumber = accountNumber;
-        this.transactions = transactions;
-    }
 
-    public void deposit(BigDecimal amount, LocalDateTime depositDateTime) {
+    public void deposit(final BigDecimal amount, final LocalDateTime depositDateTime) {
         if (amount.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException(String.format("Amount %s to deposit must be positive", amount));
         } else {
@@ -34,7 +30,7 @@ public class BankAccount {
         }
     }
 
-    public void withdraw(BigDecimal amount, LocalDateTime withdrawDateTime) {
+    public void withdraw(final BigDecimal amount, final LocalDateTime withdrawDateTime) {
         if (amount.compareTo(balance) > 0) {
             throw new IllegalArgumentException(String.format("Insufficient balance %s", balance));
         }
@@ -44,7 +40,7 @@ public class BankAccount {
 
     }
 
-    public void getStatement(LocalDateTime startDate, LocalDateTime endDate) {
+    public void getStatement(final LocalDateTime startDate, final LocalDateTime endDate) {
 
         System.out.println("Account statement for " + accountHolder + " (account number " + accountNumber + ") from " + startDate + " to " + endDate + ":");
         for (Transaction t : transactions) {
@@ -54,6 +50,7 @@ public class BankAccount {
         }
         System.out.println("End of statement");
     }
+
     public String convertTransactionToLine(Transaction transaction) {
         return transaction.getType() + " | " + transaction.getDate() + "  | " + transaction.getAmount() + " | " + transaction.getNewBalance();
     }
