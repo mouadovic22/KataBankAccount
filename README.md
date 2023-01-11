@@ -1,6 +1,6 @@
 # Bank-Account
 Bank account kata
-Think of your personal bank account experience When in doubt, go for the simplest solution Requirements using TDD:
+Think of your personal bank account experience When in doubt, go for the simplest solution:
 
 · Deposit and Withdrawal
 
