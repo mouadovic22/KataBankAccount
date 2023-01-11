@@ -12,9 +12,9 @@ public class Main {
     public static void main(String[] args) {
         PrintStatement printStatement = new PrintStatementImpl();
         BankAccount bankAccount = new BankAccount(printStatement, BigDecimal.ZERO, "Bart Simpson", 123, new ArrayList<>());
-        bankAccount.deposit(new BigDecimal(10), LocalDateTime.now());
-        bankAccount.deposit(new BigDecimal(40), LocalDateTime.now());
-        bankAccount.withdraw(new BigDecimal(10), LocalDateTime.now());
-        bankAccount.getStatement(LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(1));
+        bankAccount.deposit(new BigDecimal(10), LocalDateTime.now().minusHours(1));
+        bankAccount.deposit(new BigDecimal(40), LocalDateTime.now().minusHours(2));
+        bankAccount.withdraw(new BigDecimal(10), LocalDateTime.now().minusHours(3));
+        bankAccount.getStatement(LocalDateTime.now().minusDays(10), LocalDateTime.now().plusDays(10));
     }
 }

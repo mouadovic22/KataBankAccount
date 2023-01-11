@@ -1,5 +1,6 @@
 package fr.kata.account.domain;
 
+import fr.kata.account.converter.Converter;
 import fr.kata.account.print.PrintStatement;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 public class BankAccount {
 
+    private static final String DELIMITER = " | ";
     private final PrintStatement printStatement;
+    private static final String DATE_FORMATTER= "yyyy-MM-dd HH:mm";
 
     private BigDecimal balance;
     private final String accountHolder;
@@ -45,14 +48,11 @@ public class BankAccount {
         System.out.println("Account statement for " + accountHolder + " (account number " + accountNumber + ") from " + startDate + " to " + endDate + ":");
         for (Transaction t : transactions) {
             if (t.getDate().compareTo(startDate) >= 0 && t.getDate().compareTo(endDate) <= 0) {
-                printStatement.print(convertTransactionToLine(t));
+                printStatement.print(Converter.convertTransactionToLine(t));
             }
         }
         System.out.println("End of statement");
     }
 
-    public String convertTransactionToLine(Transaction transaction) {
-        return transaction.getType() + " | " + transaction.getDate() + "  | " + transaction.getAmount() + " | " + transaction.getNewBalance();
-    }
 
 }

@@ -74,8 +74,8 @@ public class BankAccountTest {
 
         bankAccount.getStatement(LocalDateTime.of(2023, 1, 1, 10, 0), LocalDateTime.of(2023, 2, 1, 14, 0));
 
-        inOrder.verify(printStatement).print("DEPOSIT | 2023-01-01T14:00  | 250.0 | 250.0");
-        inOrder.verify(printStatement).print("WITHDRAW | 2023-01-02T14:00  | 50.0 | 200.0");
+        inOrder.verify(printStatement).print("DEPOSIT | 2023-01-01 14:00 | 250.0 | 250.0");
+        inOrder.verify(printStatement).print("WITHDRAW | 2023-01-02 14:00 | 50.0 | 200.0");
     }
 
 }
